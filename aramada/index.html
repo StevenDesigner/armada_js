@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Input Form</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    * {
+      box-sizing: border-box !important;
+    }
+
+    body {
+      background-image: url('266471.webp');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .vh-100 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .content {
+      padding: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container vh-100 main">
+    <div class="bg-light  content">
+
+      <h2 class="mb-4 ">Input Form</h2>
+      <form id="inputForm">
+        <div class="form-group ">
+          <label for="v1">V1:</label>
+          <input type="text" class="form-control" id="v1" placeholder="Enter value for v1">
+        </div>
+        <div class="form-group">
+          <label for="v2">V2:</label>
+          <input type="text" class="form-control" id="v2" placeholder="Enter value for v2">
+        </div>
+        <div class="form-group">
+          <label for="v3">V3:</label>
+          <input type="text" class="form-control" id="v3" placeholder="Enter value for v3">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      <br>
+      <h2>Classification:</h2>
+      <div class="loader" style="display: none;" id="loader">
+        <br>
+        <img src="loader.gif" alt="loader" width="100%">
+        RNN Algorithm Processing..
+      </div>
+      <p id="para" class="bg-info text-light font-weight-bold p-2" style="display: none;">
+
+      </p>
+    </div>
+
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    // JavaScript to handle form submission
+    $(document).ready(function () {
+      $('#inputForm').submit(function (e) {
+        e.preventDefault(); // Prevent the default form submission
+
+        $("#loader").css("display", "block");
+        
+
+      
+        
+        let ans = "";
+        // Retrieve values from input fields
+        var v1Value = $('#v1').val();
+        var v2Value = $('#v2').val();
+        var v3Value = $('#v3').val();
+
+        // check if it is 0
+        if (v1Value == 0 || v2Value == 0 || v3Value == 0) {
+          if (v1Value == 0) {
+            ans += " Panel 1";
+          }
+          if (v2Value == 0) {
+            if (ans !== "") {
+              ans += ","
+            }
+            ans += " Panel 2";
+          }
+          if (v3Value == 0) {
+            if (ans !== "") {
+              ans += ","
+            }
+            ans += " Panel 3";
+          }
+          ans += " Open Circuit Detected"
+        }
+
+
+        // check if it is 1
+        if (v1Value < 0 || v2Value < 0 || v3Value < 0) {
+          if (ans !== "") {
+            ans += "<br>"
+          }
+          if (v1Value < 0) {
+            ans += " Panel 1";
+          }
+          if (v2Value < 0) {
+            if (ans !== "") {
+              ans += ","
+            }
+            ans += " Panel 2";
+          }
+          if (v3Value < 0) {
+            if (ans !== "") {
+              ans += ","
+            }
+            ans += " Panel 3";
+          }
+          ans += " Ground Detected"
+        }
+        setTimeout(myFunction, 3000)
+        function myFunction() {
+          $("#para").css("display", "block");
+          $("#loader").css("display", "none");
+          $("#para").html(ans)
+        }
+        // alert(ans +" Ground Detected")
+
+        //$("#para").html(ans)
+
+      });
+    });
+  </script>
+
+</body>
+
+</html>
